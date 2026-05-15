@@ -247,11 +247,11 @@ function TrustStrip() {
     <section className="trust-strip" aria-label="Practice highlights">
       <div>
         <strong>HCPC</strong>
-        <span>registration placeholder</span>
+        <span>registered with HCPC</span>
       </div>
       <div>
         <strong>CSP</strong>
-        <span>membership placeholder</span>
+        <span>registered with CSP</span>
       </div>
       <div>
         <strong>London</strong>
