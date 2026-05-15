@@ -66,10 +66,10 @@ const conditions = [
 ];
 
 const fees = [
-  ['Initial assessment', '45-60 minutes', '£___'],
-  ['Follow-up session', '30-45 minutes', '£___'],
-  ['Online consultation', '30 minutes', '£___'],
-  ['London home visit', 'Area dependent', 'From £___'],
+  ['Initial assessment', '45-60 minutes', 'Contact us for more information'],
+  ['Follow-up session', '30-45 minutes', 'Contact us for more information'],
+  ['Online consultation', '30 minutes', 'Contact us for more information'],
+  ['London home visit', 'Area dependent', 'Contact us for more information'],
 ];
 
 const faqs = [
@@ -505,17 +505,17 @@ function ApproachPage({ navigate }) {
 function FeesPage({ navigate }) {
   return (
     <PageFrame
-      title="Transparent session options, ready for your final fee structure."
-      text="Add exact prices when confirmed. The page is designed to make appointment types, session lengths and booking routes easy to compare."
+      title="Session options for clinic, online and London home appointments."
+      text="Choose the appointment type that best fits your needs. For fees, availability and the right starting point, contact Bodynetics directly."
       image="https://images.unsplash.com/photo-1519823551278-64ac92734fb1?auto=format&fit=crop&w=1400&q=82"
       imageAlt="Physiotherapy notes and appointment planning"
     >
       <section className="fees-grid">
-        {fees.map(([title, duration, price]) => (
+        {fees.map(([title, duration, note]) => (
           <article className="fee-card" key={title}>
             <h2>{title}</h2>
             <p>{duration}</p>
-            <strong>{price}</strong>
+            <strong>{note}</strong>
           </article>
         ))}
       </section>
@@ -523,8 +523,8 @@ function FeesPage({ navigate }) {
         <div>
           <h2>Booking notes</h2>
           <p>
-            Add your cancellation policy, insurance position and payment preferences here once
-            confirmed. Keep the wording plain and visible before clients book.
+            Send a short enquiry with your location, preferred appointment type and reason for
+            visiting. The clinic can then share the most relevant availability and fee information.
           </p>
         </div>
         <button className="primary-button compact" onClick={() => navigate('/contact')}>

@@ -783,8 +783,10 @@ button {
 .fee-card strong {
   display: block;
   margin-top: 1.25rem;
-  font-family: "Playfair Display", Georgia, "Times New Roman", serif;
-  font-size: 2.15rem;
+  max-width: 13rem;
+  color: var(--cobalt);
+  font-size: 1rem;
+  line-height: 1.45;
 }
 
 .footer {
