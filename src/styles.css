@@ -394,6 +394,10 @@ button {
   gap: 1rem;
 }
 
+.service-grid {
+  align-items: stretch;
+}
+
 .service-card,
 .testimonial-card,
 .condition-card,
@@ -411,6 +415,8 @@ button {
 .service-card {
   min-height: 17rem;
   padding: 1.3rem;
+  min-width: 0;
+  overflow: visible;
 }
 
 .service-card svg,
@@ -431,6 +437,7 @@ button {
   font-family: "Playfair Display", Georgia, "Times New Roman", serif;
   font-size: 1.35rem;
   line-height: 1.15;
+  overflow-wrap: anywhere;
 }
 
 .service-card p,
@@ -443,6 +450,7 @@ button {
 .form-note {
   color: var(--ink-soft);
   line-height: 1.65;
+  overflow-wrap: anywhere;
 }
 
 .centered-action {
@@ -821,7 +829,6 @@ button {
   }
 
   .trust-strip,
-  .service-grid,
   .testimonial-grid,
   .condition-grid,
   .fees-grid,
@@ -829,6 +836,24 @@ button {
   .service-detail-list,
   .process-list {
     grid-template-columns: 1fr 1fr;
+  }
+
+  .service-grid {
+    display: flex;
+    gap: 1rem;
+    margin-left: -1.2rem;
+    margin-right: -1.2rem;
+    padding: 0 1.2rem 0.75rem;
+    overflow-x: auto;
+    overscroll-behavior-inline: contain;
+    scroll-padding-inline: 1.2rem;
+    scrollbar-width: thin;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .service-card {
+    flex: 0 0 min(21rem, 78vw);
+    min-height: 18rem;
   }
 
   .split-section {
@@ -892,7 +917,6 @@ button {
   }
 
   .trust-strip,
-  .service-grid,
   .testimonial-grid,
   .condition-grid,
   .fees-grid,
@@ -900,6 +924,17 @@ button {
   .service-detail-list,
   .process-list {
     grid-template-columns: 1fr;
+  }
+
+  .service-grid {
+    margin-left: -1rem;
+    margin-right: -1rem;
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+
+  .service-card {
+    flex-basis: min(19.5rem, 84vw);
   }
 
   .trust-strip div,
