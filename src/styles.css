@@ -1,0 +1,919 @@
+:root {
+  color-scheme: light;
+  --ink: #0b1d3d;
+  --ink-soft: #42516e;
+  --paper: #fff7e6;
+  --paper-clean: #fffdf8;
+  --mist: #cfe4ff;
+  --sage: #1e4fbf;
+  --sage-dark: #0b1d3d;
+  --mint: #cfe4ff;
+  --clay: #ffe29a;
+  --cobalt: #1e4fbf;
+  --line: rgba(11, 29, 61, 0.14);
+  --shadow: 0 26px 70px rgba(11, 29, 61, 0.16);
+  font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  background: var(--paper);
+  color: var(--ink);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  min-width: 320px;
+  background:
+    radial-gradient(circle at 16% 0%, rgba(207, 228, 255, 0.82), transparent 31rem),
+    radial-gradient(circle at 86% 10%, rgba(255, 226, 154, 0.42), transparent 24rem),
+    linear-gradient(180deg, var(--paper-clean) 0%, var(--paper) 47%, #f8fbff 100%);
+}
+
+button,
+input,
+textarea {
+  font: inherit;
+}
+
+button {
+  cursor: pointer;
+}
+
+.site-shell {
+  min-height: 100vh;
+  overflow-x: clip;
+}
+
+.header {
+  position: sticky;
+  top: 0;
+  z-index: 20;
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  align-items: center;
+  gap: 1rem;
+  max-width: 1180px;
+  margin: 0 auto;
+  padding: 1rem 1.2rem;
+  backdrop-filter: blur(18px);
+}
+
+.brand,
+.nav-link,
+.mobile-link,
+.footer-links button {
+  border: 0;
+  background: transparent;
+  color: inherit;
+}
+
+.brand {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0;
+  text-align: left;
+}
+
+.brand-mark {
+  display: grid;
+  width: 42px;
+  height: 42px;
+  place-items: center;
+  border-radius: 50%;
+  background:
+    linear-gradient(140deg, rgba(255, 226, 154, 0.95), transparent 44%),
+    linear-gradient(150deg, #1e4fbf 0%, #0b1d3d 100%);
+  color: var(--paper-clean);
+  font-family: "Playfair Display", Georgia, "Times New Roman", serif;
+  font-size: 1.35rem;
+  font-weight: 700;
+}
+
+.brand strong,
+.footer-brand strong {
+  display: block;
+  font-family: "Playfair Display", Georgia, "Times New Roman", serif;
+  font-size: 1.18rem;
+  letter-spacing: 0;
+}
+
+.brand small {
+  display: block;
+  color: var(--cobalt);
+  font-size: 0.76rem;
+  font-weight: 700;
+  letter-spacing: 0.28em;
+  margin-top: 0.08rem;
+  text-transform: uppercase;
+}
+
+.desktop-nav {
+  justify-self: center;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.15rem;
+  padding: 0.35rem;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  background: rgba(255, 253, 250, 0.72);
+  box-shadow: 0 12px 36px rgba(38, 64, 55, 0.08);
+}
+
+.nav-link {
+  min-height: 2.35rem;
+  padding: 0 0.82rem;
+  border-radius: 999px;
+  color: var(--ink-soft);
+  font-size: 0.88rem;
+}
+
+.nav-link.active,
+.nav-link:hover {
+  background: var(--cobalt);
+  color: var(--paper-clean);
+}
+
+.header-cta,
+.primary-button,
+.secondary-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.55rem;
+  min-height: 3rem;
+  border-radius: 999px;
+  border: 1px solid transparent;
+  font-weight: 700;
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+.header-cta {
+  padding: 0 1rem;
+  background: var(--cobalt);
+  color: white;
+}
+
+.primary-button {
+  padding: 0 1.25rem;
+  background: var(--ink);
+  color: var(--paper-clean);
+}
+
+.primary-button.light {
+  background: var(--paper-clean);
+  color: var(--ink);
+}
+
+.primary-button.compact {
+  min-height: 2.75rem;
+}
+
+.secondary-button {
+  padding: 0 1.15rem;
+  background: rgba(255, 253, 250, 0.78);
+  border-color: var(--line);
+  color: var(--ink);
+}
+
+.secondary-button.dark {
+  background: transparent;
+  border-color: rgba(21, 34, 31, 0.28);
+}
+
+.secondary-button.full {
+  width: 100%;
+}
+
+.mobile-menu-button {
+  display: none;
+  width: 44px;
+  height: 44px;
+  border: 1px solid var(--line);
+  border-radius: 50%;
+  background: var(--paper-clean);
+  color: var(--ink);
+}
+
+.mobile-nav {
+  position: absolute;
+  inset: calc(100% - 0.4rem) 1rem auto;
+  display: grid;
+  gap: 0.3rem;
+  padding: 0.55rem;
+  border: 1px solid var(--line);
+  border-radius: 1.35rem;
+  background: rgba(255, 253, 250, 0.96);
+  box-shadow: var(--shadow);
+}
+
+.mobile-link {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  min-height: 2.7rem;
+  padding: 0 0.9rem;
+  border-radius: 0.95rem;
+  color: var(--ink-soft);
+}
+
+.mobile-link.active {
+  background: var(--ink);
+  color: white;
+}
+
+.hero-section,
+.page-hero {
+  max-width: 1180px;
+  margin: 0 auto;
+  padding: clamp(2rem, 5vw, 5.5rem) 1.2rem 3rem;
+}
+
+.hero-section {
+  display: grid;
+  grid-template-columns: minmax(0, 0.92fr) minmax(300px, 1.08fr);
+  align-items: center;
+  gap: clamp(2rem, 5vw, 4.8rem);
+  min-height: calc(100vh - 86px);
+}
+
+.hero-copy h1,
+.page-hero h1 {
+  margin: 0;
+  max-width: 13ch;
+  font-family: "Playfair Display", Georgia, "Times New Roman", serif;
+  font-size: clamp(3.2rem, 7.2vw, 6.85rem);
+  line-height: 0.95;
+  letter-spacing: 0;
+}
+
+.hero-copy p,
+.page-hero p,
+.section-intro p,
+.approach-copy p,
+.split-section p,
+.wide-panel p {
+  color: var(--ink-soft);
+  font-size: clamp(1rem, 1.8vw, 1.16rem);
+  line-height: 1.75;
+}
+
+.hero-copy p {
+  max-width: 35rem;
+  margin: 1.5rem 0 0;
+}
+
+.hero-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.85rem;
+  margin-top: 2rem;
+}
+
+.hero-media {
+  position: relative;
+  min-height: 36rem;
+  border-radius: 2rem;
+  overflow: hidden;
+  box-shadow: var(--shadow);
+}
+
+.hero-media img,
+.page-hero img,
+.approach-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.hero-card {
+  position: absolute;
+  left: 1.2rem;
+  right: 1.2rem;
+  bottom: 1.2rem;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 1rem;
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  border-radius: 1.2rem;
+  background: rgba(255, 253, 250, 0.86);
+  backdrop-filter: blur(14px);
+  color: var(--ink);
+  font-weight: 700;
+}
+
+.trust-strip {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  max-width: 1180px;
+  margin: -0.5rem auto 0;
+  padding: 0 1.2rem 3rem;
+  gap: 1px;
+}
+
+.trust-strip div {
+  padding: 1.3rem;
+  background: rgba(255, 253, 250, 0.78);
+  border-top: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+}
+
+.trust-strip div:first-child {
+  border-radius: 1.3rem 0 0 1.3rem;
+  border-left: 1px solid var(--line);
+}
+
+.trust-strip div:last-child {
+  border-radius: 0 1.3rem 1.3rem 0;
+  border-right: 1px solid var(--line);
+}
+
+.trust-strip strong {
+  display: block;
+  font-family: "Playfair Display", Georgia, "Times New Roman", serif;
+  font-size: 1.35rem;
+}
+
+.trust-strip span {
+  display: block;
+  margin-top: 0.35rem;
+  color: var(--ink-soft);
+}
+
+.section {
+  max-width: 1180px;
+  margin: 0 auto;
+  padding: clamp(3rem, 7vw, 6rem) 1.2rem;
+}
+
+.section.muted {
+  max-width: none;
+  padding-left: max(1.2rem, calc((100vw - 1180px) / 2 + 1.2rem));
+  padding-right: max(1.2rem, calc((100vw - 1180px) / 2 + 1.2rem));
+  background: rgba(231, 238, 232, 0.72);
+}
+
+.section-intro {
+  max-width: 47rem;
+  margin-bottom: 2.2rem;
+}
+
+.section-intro h2,
+.approach-copy h2,
+.contact-band h2,
+.split-section h2,
+.wide-panel h2,
+.page-hero h1 {
+  font-family: "Playfair Display", Georgia, "Times New Roman", serif;
+}
+
+.section-intro h2,
+.approach-copy h2,
+.contact-band h2,
+.split-section h2,
+.wide-panel h2 {
+  margin: 0;
+  font-size: clamp(2.2rem, 4vw, 4rem);
+  line-height: 1.03;
+  letter-spacing: 0;
+}
+
+.service-grid,
+.testimonial-grid,
+.condition-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1rem;
+}
+
+.service-card,
+.testimonial-card,
+.condition-card,
+.process-card,
+.service-detail,
+.profile-panel,
+.booking-panel,
+.contact-form,
+.wide-panel {
+  border: 1px solid var(--line);
+  border-radius: 1.3rem;
+  background: rgba(255, 253, 250, 0.75);
+}
+
+.service-card {
+  min-height: 17rem;
+  padding: 1.3rem;
+}
+
+.service-card svg,
+.service-icon,
+.condition-card svg,
+.booking-panel > svg {
+  color: var(--cobalt);
+}
+
+.service-card h3,
+.testimonial-card strong,
+.condition-card h2,
+.process-card h2,
+.service-detail h2,
+.profile-panel h3,
+.booking-panel h2 {
+  margin: 1rem 0 0;
+  font-family: "Playfair Display", Georgia, "Times New Roman", serif;
+  font-size: 1.35rem;
+  line-height: 1.15;
+}
+
+.service-card p,
+.testimonial-card p,
+.condition-card p,
+.process-card p,
+.service-detail p,
+.booking-panel p,
+.profile-panel li,
+.form-note {
+  color: var(--ink-soft);
+  line-height: 1.65;
+}
+
+.centered-action {
+  display: flex;
+  justify-content: center;
+  margin-top: 1.4rem;
+}
+
+.approach-band {
+  display: grid;
+  grid-template-columns: minmax(300px, 0.9fr) minmax(0, 1fr);
+  gap: clamp(2rem, 5vw, 4rem);
+  align-items: center;
+  max-width: 1180px;
+  margin: 0 auto;
+  padding: clamp(3rem, 7vw, 6rem) 1.2rem;
+}
+
+.approach-image {
+  height: 34rem;
+  overflow: hidden;
+  border-radius: 2rem;
+  box-shadow: var(--shadow);
+}
+
+.check-list,
+.stack-list {
+  display: grid;
+  gap: 0.85rem;
+  padding: 0;
+  margin: 1.5rem 0;
+  list-style: none;
+}
+
+.check-list li {
+  display: flex;
+  gap: 0.7rem;
+  align-items: center;
+  color: var(--ink);
+  font-weight: 700;
+}
+
+.testimonial-grid {
+  grid-template-columns: repeat(3, 1fr);
+}
+
+.testimonial-card {
+  padding: 1.4rem;
+}
+
+.stars {
+  display: flex;
+  gap: 0.25rem;
+  color: var(--clay);
+}
+
+.contact-band {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1.5rem;
+  max-width: 1180px;
+  margin: clamp(3rem, 7vw, 6rem) auto;
+  padding: clamp(1.7rem, 4vw, 3rem);
+  border-radius: 1.7rem;
+  background: var(--sage-dark);
+  color: var(--paper-clean);
+}
+
+.contact-band p {
+  margin: 0.85rem 0 0;
+  color: rgba(255, 255, 255, 0.76);
+}
+
+.page-hero {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(300px, 0.86fr);
+  gap: clamp(2rem, 5vw, 4rem);
+  align-items: end;
+}
+
+.page-hero h1 {
+  max-width: 14ch;
+  font-size: clamp(2.9rem, 6vw, 5.5rem);
+}
+
+.page-hero p {
+  max-width: 42rem;
+}
+
+.page-hero img {
+  aspect-ratio: 4 / 3;
+  border-radius: 1.8rem;
+  box-shadow: var(--shadow);
+}
+
+.split-section,
+.contact-layout,
+.service-detail-list,
+.process-list {
+  max-width: 1180px;
+  margin: 0 auto;
+  padding: clamp(2rem, 5vw, 4rem) 1.2rem;
+}
+
+.split-section {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 24rem;
+  gap: 2rem;
+}
+
+.profile-panel,
+.wide-panel,
+.booking-panel,
+.contact-form {
+  padding: 1.5rem;
+}
+
+.stack-list li {
+  padding-bottom: 0.85rem;
+  border-bottom: 1px solid var(--line);
+}
+
+.service-detail-list,
+.process-list {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1rem;
+}
+
+.service-detail {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 1rem;
+  padding: 1.4rem;
+}
+
+.service-icon {
+  display: grid;
+  width: 3.2rem;
+  height: 3.2rem;
+  place-items: center;
+  border-radius: 50%;
+  background: var(--mist);
+}
+
+.wide-panel {
+  max-width: 1180px;
+  margin: 1rem auto;
+}
+
+.condition-cloud {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.7rem;
+  margin-top: 1.2rem;
+}
+
+.condition-cloud span {
+  padding: 0.75rem 1rem;
+  border-radius: 999px;
+  background: var(--mist);
+  color: var(--ink);
+  font-weight: 700;
+}
+
+.condition-grid {
+  max-width: 1180px;
+  margin: 0 auto;
+  padding: clamp(2rem, 5vw, 4rem) 1.2rem;
+  grid-template-columns: repeat(2, 1fr);
+}
+
+.condition-card {
+  padding: 1.25rem;
+}
+
+.process-card {
+  padding: 1.4rem;
+}
+
+.process-card span {
+  color: var(--clay);
+  font-family: "Playfair Display", Georgia, "Times New Roman", serif;
+  font-size: 2rem;
+  font-weight: 700;
+}
+
+.two-column-panel {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.contact-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 26rem;
+  gap: 1rem;
+  align-items: start;
+}
+
+.contact-form {
+  display: grid;
+  gap: 1rem;
+}
+
+.contact-form label {
+  display: grid;
+  gap: 0.45rem;
+  color: var(--ink);
+  font-weight: 700;
+}
+
+.contact-form input,
+.contact-form select,
+.contact-form textarea {
+  width: 100%;
+  border: 1px solid var(--line);
+  border-radius: 1rem;
+  background: var(--paper-clean);
+  color: var(--ink);
+  padding: 0.95rem 1rem;
+  outline: none;
+}
+
+.contact-form select {
+  appearance: none;
+}
+
+.contact-form textarea {
+  resize: vertical;
+}
+
+.contact-form input:focus,
+.contact-form select:focus,
+.contact-form textarea:focus {
+  border-color: var(--sage-dark);
+  box-shadow: 0 0 0 4px rgba(30, 79, 191, 0.16);
+}
+
+.booking-panel {
+  position: sticky;
+  top: 6.5rem;
+}
+
+.contact-details {
+  display: grid;
+  gap: 0.75rem;
+  margin-top: 1.25rem;
+  color: var(--ink-soft);
+}
+
+.contact-details span {
+  display: flex;
+  align-items: center;
+  gap: 0.55rem;
+}
+
+.fees-grid,
+.faq-list {
+  display: grid;
+  max-width: 1180px;
+  margin: 0 auto;
+  padding: clamp(2rem, 5vw, 4rem) 1.2rem;
+  gap: 1rem;
+}
+
+.fees-grid {
+  grid-template-columns: repeat(4, 1fr);
+}
+
+.faq-list {
+  grid-template-columns: repeat(2, 1fr);
+}
+
+.fee-card,
+.faq-item {
+  border: 1px solid var(--line);
+  border-radius: 1.3rem;
+  background: rgba(255, 253, 250, 0.75);
+  padding: 1.4rem;
+}
+
+.fee-card h2,
+.faq-item h2 {
+  margin: 0;
+  font-family: "Playfair Display", Georgia, "Times New Roman", serif;
+  font-size: 1.45rem;
+  line-height: 1.15;
+}
+
+.fee-card p,
+.faq-item p {
+  color: var(--ink-soft);
+  line-height: 1.65;
+}
+
+.fee-card strong {
+  display: block;
+  margin-top: 1.25rem;
+  font-family: "Playfair Display", Georgia, "Times New Roman", serif;
+  font-size: 2.15rem;
+}
+
+.footer {
+  display: flex;
+  justify-content: space-between;
+  gap: 2rem;
+  max-width: 1180px;
+  margin: 0 auto;
+  padding: 3rem 1.2rem 2.2rem;
+  border-top: 1px solid var(--line);
+}
+
+.footer-brand {
+  display: flex;
+  gap: 0.85rem;
+  max-width: 26rem;
+}
+
+.footer-brand p {
+  color: var(--ink-soft);
+  margin: 0.35rem 0 0;
+  line-height: 1.6;
+}
+
+.footer-links {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  gap: 0.55rem;
+}
+
+.footer-links button {
+  color: var(--ink-soft);
+  padding: 0.4rem 0.25rem;
+}
+
+@media (max-width: 920px) {
+  .header {
+    grid-template-columns: auto 1fr auto;
+  }
+
+  .desktop-nav,
+  .header-cta {
+    display: none;
+  }
+
+  .mobile-menu-button {
+    display: grid;
+    place-items: center;
+    justify-self: end;
+  }
+
+  .hero-section,
+  .page-hero,
+  .approach-band,
+  .split-section,
+  .contact-layout {
+    grid-template-columns: 1fr;
+  }
+
+  .hero-section {
+    min-height: auto;
+  }
+
+  .hero-media {
+    min-height: 28rem;
+  }
+
+  .trust-strip,
+  .service-grid,
+  .testimonial-grid,
+  .condition-grid,
+  .fees-grid,
+  .faq-list,
+  .service-detail-list,
+  .process-list {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .split-section {
+    gap: 1rem;
+  }
+
+  .booking-panel {
+    position: static;
+  }
+}
+
+@media (max-width: 640px) {
+  .header {
+    padding: 0.8rem 0.9rem;
+  }
+
+  .brand small {
+    display: none;
+  }
+
+  .hero-section,
+  .page-hero,
+  .section,
+  .approach-band,
+  .split-section,
+  .contact-layout,
+  .service-detail-list,
+  .process-list,
+  .condition-grid {
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+
+  .hero-copy h1,
+  .page-hero h1 {
+    overflow-wrap: break-word;
+    font-size: clamp(2.55rem, 13vw, 3.35rem);
+    line-height: 0.98;
+  }
+
+  .hero-media {
+    min-height: 22rem;
+    border-radius: 1.35rem;
+  }
+
+  .hero-actions,
+  .contact-band,
+  .footer,
+  .two-column-panel {
+    align-items: stretch;
+    flex-direction: column;
+  }
+
+  .primary-button,
+  .secondary-button {
+    width: 100%;
+  }
+
+  .trust-strip,
+  .service-grid,
+  .testimonial-grid,
+  .condition-grid,
+  .fees-grid,
+  .faq-list,
+  .service-detail-list,
+  .process-list {
+    grid-template-columns: 1fr;
+  }
+
+  .trust-strip div,
+  .trust-strip div:first-child,
+  .trust-strip div:last-child {
+    border: 1px solid var(--line);
+    border-radius: 1rem;
+  }
+
+  .approach-image {
+    height: 22rem;
+    border-radius: 1.35rem;
+  }
+
+  .contact-band {
+    margin-left: 1rem;
+    margin-right: 1rem;
+  }
+
+  .service-detail {
+    grid-template-columns: 1fr;
+  }
+
+  .footer-links {
+    justify-content: flex-start;
+  }
+}
