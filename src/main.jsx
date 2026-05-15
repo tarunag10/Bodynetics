@@ -13,7 +13,6 @@ import {
   Menu,
   MoveRight,
   ShieldCheck,
-  Sparkles,
   Star,
   X,
 } from 'lucide-react';
@@ -157,11 +156,7 @@ function Header({ path, navigate, menuOpen, setMenuOpen }) {
   return (
     <header className="header">
       <button className="brand" onClick={() => navigate('/')} aria-label="Go to home">
-        <span className="brand-mark">B</span>
-        <span>
-          <strong>Bodynetics</strong>
-          <small>Physiotherapy clinic</small>
-        </span>
+        <img className="brand-logo" src="/brand/bodynetics-logo.png" alt="Bodynetics Physiotherapy Clinic London" />
       </button>
       <nav className="desktop-nav" aria-label="Primary navigation">
         {navItems.map((item) => (
@@ -212,7 +207,7 @@ function HomePage({ navigate }) {
     <>
       <section className="hero-section">
         <div className="hero-copy">
-          <h1>London physiotherapy for people who want to move well again.</h1>
+          <h1>London physio care for movement and recovery.</h1>
           <p>
             Bodynetics blends careful assessment, modern rehabilitation and calm clinical guidance
             for pain, injury and performance goals.
@@ -233,7 +228,7 @@ function HomePage({ navigate }) {
             alt="Physiotherapist guiding a mobility exercise"
           />
           <div className="hero-card">
-            <Sparkles size={20} />
+            <img src="/brand/bodynetics-mark.png" alt="" />
             <span>Assessment-led care, practical plans, London-based appointments.</span>
           </div>
         </div>
@@ -627,9 +622,8 @@ function Footer({ navigate }) {
   return (
     <footer className="footer">
       <div className="footer-brand">
-        <span className="brand-mark">B</span>
+        <img className="footer-logo" src="/brand/bodynetics-logo.png" alt="Bodynetics Physiotherapy Clinic London" />
         <div>
-          <strong>Bodynetics</strong>
           <p>London physiotherapy for injury, recovery and movement confidence.</p>
         </div>
       </div>

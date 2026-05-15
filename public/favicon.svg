@@ -1,6 +1,0 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
-  <rect width="64" height="64" rx="32" fill="#0b1d3d"/>
-  <path d="M15 48 C23 38 29 32 22 17 C34 22 42 31 32 46" fill="none" stroke="#cfe4ff" stroke-width="7" stroke-linecap="round"/>
-  <path d="M16 39 C24 31 29 25 29 15" fill="none" stroke="#ffe29a" stroke-width="4" stroke-linecap="round"/>
-  <text x="50%" y="56%" text-anchor="middle" font-family="Georgia, serif" font-size="34" font-weight="700" fill="#fffdfa">B</text>
-</svg>
