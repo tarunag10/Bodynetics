@@ -153,6 +153,15 @@ function App() {
 }
 
 function Header({ path, navigate, menuOpen, setMenuOpen }) {
+  React.useEffect(() => {
+    if (!menuOpen) return undefined;
+    const onKeyDown = (event) => {
+      if (event.key === 'Escape') setMenuOpen(false);
+    };
+    window.addEventListener('keydown', onKeyDown);
+    return () => window.removeEventListener('keydown', onKeyDown);
+  }, [menuOpen, setMenuOpen]);
+
   return (
     <header className="header">
       <button className="brand" onClick={() => navigate('/')} aria-label="Go to home">
@@ -178,25 +187,43 @@ function Header({ path, navigate, menuOpen, setMenuOpen }) {
         onClick={() => setMenuOpen((open) => !open)}
         aria-label={menuOpen ? 'Close menu' : 'Open menu'}
         aria-expanded={menuOpen}
+        aria-controls="mobile-navigation"
       >
         {menuOpen ? <X size={22} /> : <Menu size={22} />}
       </button>
       {menuOpen && (
-        <div className="mobile-nav" aria-label="Mobile navigation">
-          {navItems.map((item) => (
+        <>
+          <button
+            className="mobile-nav-backdrop"
+            aria-label="Close menu"
+            onClick={() => setMenuOpen(false)}
+          />
+          <div id="mobile-navigation" className="mobile-nav" aria-label="Mobile navigation">
+            {navItems.map((item) => (
+              <button
+                key={item.path}
+                className={path === item.path ? 'mobile-link active' : 'mobile-link'}
+                onClick={() => {
+                  navigate(item.path);
+                  setMenuOpen(false);
+                }}
+              >
+                {item.label}
+                <ChevronRight size={16} />
+              </button>
+            ))}
             <button
-              key={item.path}
-              className={path === item.path ? 'mobile-link active' : 'mobile-link'}
+              className="mobile-booking-link"
               onClick={() => {
-                navigate(item.path);
+                navigate('/contact');
                 setMenuOpen(false);
               }}
             >
-              {item.label}
-              <ChevronRight size={16} />
+              Book a consultation
+              <ArrowRight size={17} />
             </button>
-          ))}
-        </div>
+          </div>
+        </>
       )}
     </header>
   );
