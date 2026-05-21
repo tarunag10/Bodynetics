@@ -11,9 +11,9 @@ import {
   HeartPulse,
   MapPin,
   Menu,
-  MoveRight,
   ShieldCheck,
   Star,
+  Stethoscope,
   X,
 } from 'lucide-react';
 import './styles.css';
@@ -140,12 +140,7 @@ function App() {
 
   return (
     <div className="site-shell">
-      <Header
-        path={path}
-        navigate={navigate}
-        menuOpen={menuOpen}
-        setMenuOpen={setMenuOpen}
-      />
+      <Header path={path} navigate={navigate} menuOpen={menuOpen} setMenuOpen={setMenuOpen} />
       <main>{activePage}</main>
       <Footer navigate={navigate} />
     </div>
@@ -169,11 +164,7 @@ function Header({ path, navigate, menuOpen, setMenuOpen }) {
       </button>
       <nav className="desktop-nav" aria-label="Primary navigation">
         {navItems.map((item) => (
-          <button
-            key={item.path}
-            className={path === item.path ? 'nav-link active' : 'nav-link'}
-            onClick={() => navigate(item.path)}
-          >
+          <button key={item.path} className={path === item.path ? 'nav-link active' : 'nav-link'} onClick={() => navigate(item.path)}>
             {item.label}
           </button>
         ))}
@@ -193,11 +184,7 @@ function Header({ path, navigate, menuOpen, setMenuOpen }) {
       </button>
       {menuOpen && (
         <>
-          <button
-            className="mobile-nav-backdrop"
-            aria-label="Close menu"
-            onClick={() => setMenuOpen(false)}
-          />
+          <button className="mobile-nav-backdrop" aria-label="Close menu" onClick={() => setMenuOpen(false)} />
           <div id="mobile-navigation" className="mobile-nav" aria-label="Mobile navigation">
             {navItems.map((item) => (
               <button
@@ -212,16 +199,6 @@ function Header({ path, navigate, menuOpen, setMenuOpen }) {
                 <ChevronRight size={16} />
               </button>
             ))}
-            <button
-              className="mobile-booking-link"
-              onClick={() => {
-                navigate('/contact');
-                setMenuOpen(false);
-              }}
-            >
-              Book a consultation
-              <ArrowRight size={17} />
-            </button>
           </div>
         </>
       )}
@@ -242,23 +219,14 @@ function HomePage({ navigate }) {
           <div className="hero-actions">
             <button className="primary-button" onClick={() => navigate('/contact')}>
               Request an appointment
-              <MoveRight size={18} />
+              <ArrowRight size={18} />
             </button>
             <button className="secondary-button" onClick={() => navigate('/services')}>
               Explore services
             </button>
           </div>
         </div>
-        <div className="hero-media" aria-label="Physiotherapy treatment room">
-          <img
-            src="https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?auto=format&fit=crop&w=1400&q=84"
-            alt="Physiotherapist guiding a mobility exercise"
-          />
-          <div className="hero-card">
-            <img src="/brand/bodynetics-mark.png" alt="" />
-            <span>Assessment-led care, practical plans, London-based appointments.</span>
-          </div>
-        </div>
+        <ClinicalPortrait />
       </section>
       <TrustStrip />
       <ServicesPreview navigate={navigate} />
@@ -266,6 +234,22 @@ function HomePage({ navigate }) {
       <Testimonials />
       <ContactBand navigate={navigate} />
     </>
+  );
+}
+
+function ClinicalPortrait() {
+  return (
+    <div className="hero-media" aria-label="Physiotherapy treatment room">
+      <img
+        src="https://images.unsplash.com/photo-1571019613914-85f342c6a11e?auto=format&fit=crop&w=1400&q=86"
+        alt="Physiotherapist supporting a controlled mobility exercise"
+      />
+      <div className="wave-panel" aria-hidden="true" />
+      <div className="hero-card">
+        <img src="/brand/bodynetics-mark.png" alt="" />
+        <span>Assessment-led care, practical plans, London-based appointments.</span>
+      </div>
+    </div>
   );
 }
 
@@ -290,15 +274,16 @@ function TrustStrip() {
 
 function ServicesPreview({ navigate }) {
   return (
-    <section className="section">
+    <section className="section service-section">
       <SectionIntro
         title="Care that feels considered, not templated."
         text="Each session is shaped around your injury history, lifestyle and return goals, with enough structure to know what progress should look like."
       />
       <div className="service-grid">
-        {services.map((service) => (
+        {services.map((service, index) => (
           <article className="service-card" key={service.title}>
-            <service.icon size={26} />
+            <span className="service-index">{String(index + 1).padStart(2, '0')}</span>
+            <service.icon size={25} />
             <h3>{service.title}</h3>
             <p>{service.text}</p>
           </article>
@@ -356,7 +341,7 @@ function Testimonials() {
             <div className="stars" aria-label="Five star review">
               {[0, 1, 2, 3, 4].map((star) => <Star key={star} size={16} fill="currentColor" />)}
             </div>
-            <p>“{item.quote}”</p>
+            <p>"{item.quote}"</p>
             <strong>{item.name}</strong>
           </article>
         ))}
@@ -558,6 +543,16 @@ function FaqPage({ navigate }) {
 }
 
 function ContactPage() {
+  const [status, setStatus] = useState('idle');
+
+  function onSubmit(event) {
+    event.preventDefault();
+    const form = new FormData(event.currentTarget);
+    const required = ['name', 'email', 'message'];
+    const hasMissing = required.some((field) => !String(form.get(field) || '').trim());
+    setStatus(hasMissing ? 'error' : 'sent');
+  }
+
   return (
     <PageFrame
       title="Contact Bodynetics and request an appointment."
@@ -566,7 +561,7 @@ function ContactPage() {
       imageAlt="Physiotherapist guiding a mobility exercise"
     >
       <section className="contact-layout">
-        <form className="contact-form" onSubmit={(event) => event.preventDefault()}>
+        <form className="contact-form" onSubmit={onSubmit}>
           <label>
             Full name
             <input type="text" name="name" autoComplete="name" placeholder="Your name" required />
@@ -597,6 +592,8 @@ function ContactPage() {
             Send enquiry
             <ArrowRight size={18} />
           </button>
+          {status === 'sent' && <p className="form-state success"><Check size={17} /> Enquiry captured locally. Connect this form to email or your booking system next.</p>}
+          {status === 'error' && <p className="form-state error"><X size={17} /> Please complete your name, email and reason for visit.</p>}
           <p className="form-note">Please avoid sending urgent or highly sensitive medical details through this placeholder form.</p>
         </form>
         <aside className="booking-panel">
@@ -629,7 +626,9 @@ function PageFrame({ title, text, image, imageAlt, children }) {
           <h1>{title}</h1>
           <p>{text}</p>
         </div>
-        <img src={image} alt={imageAlt} />
+        <div className="page-image">
+          <img src={image} alt={imageAlt} />
+        </div>
       </section>
       {children}
     </>
@@ -650,14 +649,16 @@ function Footer({ navigate }) {
     <footer className="footer">
       <div className="footer-brand">
         <img className="footer-logo" src="/brand/bodynetics-logo.png" alt="Bodynetics Physiotherapy Clinic London" />
-        <div>
-          <p>London physiotherapy for injury, recovery and movement confidence.</p>
-        </div>
+        <p>London physiotherapy for injury, recovery and movement confidence.</p>
       </div>
       <div className="footer-links">
         {navItems.map((item) => (
           <button key={item.path} onClick={() => navigate(item.path)}>{item.label}</button>
         ))}
+      </div>
+      <div className="footer-note">
+        <Stethoscope size={17} />
+        <span>Evidence-informed private care</span>
       </div>
     </footer>
   );
